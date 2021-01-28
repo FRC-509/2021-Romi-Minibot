@@ -1,5 +1,4 @@
-#include <iostream>
-
-int main(){
+#include "Arinjays awesome code.h"
+void ArinjaysClass::Run() {
 
 }
