@@ -1,3 +1,4 @@
-int main(){
-    
+#include "will.h"
+void willclass::Run(){
+
 }
