@@ -1,5 +1,5 @@
 //.cpp
-#include "tracy.cpp"
+#include "tracy.h"
 
 void tracy::Run() {
 

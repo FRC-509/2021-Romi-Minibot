@@ -3,11 +3,31 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "Robot.h"
+
 #include "Program.h"
+#include "anjan.h"
+#include "Arinjays awesome code.h"
+#include "hjk.h"
+#include "tracy.h"
+#include "will.h"
 
 #include <iostream>
 
 #include <frc/smartdashboard/SmartDashboard.h>
+
+Program* prgm = new Program;
+
+#define anjan
+#ifdef anjan
+#elif arinjay
+prgm = new ArinjaysClass;
+#elif sarah
+prgm = new Sarahsclass;
+#elif tracy
+prgm = new tracy;
+#elif will
+prgm = new willclass;
+#endif
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
@@ -55,6 +75,8 @@ void Robot::AutonomousPeriodic() {
   } else {
     // Default Auto goes here
   }
+
+  prgm->Run();
 }
 
 void Robot::TeleopInit() {}

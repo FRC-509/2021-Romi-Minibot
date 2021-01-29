@@ -1,3 +1,5 @@
+#pragma once
 class Program {
-    virtual void Run();
+    public:
+        virtual void Run();
 };
