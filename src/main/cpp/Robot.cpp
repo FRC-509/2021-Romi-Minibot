@@ -10,29 +10,28 @@
 #include "hjk.h"
 #include "tracy.h"
 #include "will.h"
+#include "em.h"
 
 #include <iostream>
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
-Program* prgm = new Program;
+#include "subsystems/Drivetrain.h"
+emClass* prgm;
 
-#define anjan
-#ifdef anjan
-#elif arinjay
-prgm = new ArinjaysClass;
-#elif sarah
-prgm = new Sarahsclass;
-#elif tracy
-prgm = new tracy;
-#elif will
-prgm = new willclass;
-#endif
+Drivetrain driver;
+
+// prgm = new ArinjaysClass;
+// prgm = new Sarahsclass;
+// prgm = new tracy;
+// prgm = new willclass;
+
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+  prgm = new emClass;
 }
 
 /**
@@ -75,13 +74,16 @@ void Robot::AutonomousPeriodic() {
   } else {
     // Default Auto goes here
   }
-
-  prgm->Run();
 }
 
-void Robot::TeleopInit() {}
+void Robot::TeleopInit() {
+  driver.ArcadeDrive(0.0, 0.0);
+}
 
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() {
+  driver.ArcadeDrive(0.5, 0.0);
+  
+}
 
 void Robot::DisabledInit() {}
 
@@ -90,6 +92,10 @@ void Robot::DisabledPeriodic() {}
 void Robot::TestInit() {}
 
 void Robot::TestPeriodic() {}
+
+void Robot::SimulationInit() {}
+
+void Robot::SimulationPeriodic() {}
 
 #ifndef RUNNING_FRC_TESTS
 int main() {
