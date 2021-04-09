@@ -4,34 +4,19 @@
 
 #include "Robot.h"
 
-#include "Program.h"
-#include "anjan.h"
-#include "Arinjays awesome code.h"
-#include "hjk.h"
-#include "tracy.h"
-#include "will.h"
-#include "em.h"
-
 #include <iostream>
 
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/Timer.h>
 
 #include "subsystems/Drivetrain.h"
-emClass* prgm;
-
+#include "PID.h"
 Drivetrain driver;
-
-// prgm = new ArinjaysClass;
-// prgm = new Sarahsclass;
-// prgm = new tracy;
-// prgm = new willclass;
-
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
-  prgm = new emClass;
 }
 
 /**
@@ -68,6 +53,8 @@ void Robot::AutonomousInit() {
   }
 }
 
+
+
 void Robot::AutonomousPeriodic() {
   if (m_autoSelected == kAutoNameCustom) {
     // Custom Auto goes here
@@ -76,13 +63,14 @@ void Robot::AutonomousPeriodic() {
   }
 }
 
+
 void Robot::TeleopInit() {
   driver.ArcadeDrive(0.0, 0.0);
+  driver.ResetEncoders();
 }
 
 void Robot::TeleopPeriodic() {
   driver.ArcadeDrive(0.5, 0.0);
-  
 }
 
 void Robot::DisabledInit() {}
