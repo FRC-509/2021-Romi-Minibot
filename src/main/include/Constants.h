@@ -17,3 +17,25 @@ namespace DriveConstants {
 constexpr double kCountsPerRevolution = 1440.0;
 constexpr double kWheelDiameterInch = 2.75;
 }  // namespace DriveConstants
+
+namespace AutoConstants {
+  namespace DriveConstants {
+    double ksVolts = 0.929;
+    double kvVoltSecondsPerMeter = 6.33;
+    double kaVoltSecondsSquaredPerMeter = 0.0389;
+
+    double kPDriveVel = 0.085;
+
+    double kTrackwidthMeters = 0.142072613;
+    frc::DifferentialDriveKinematics kDriveKinematics (units::meter_t(kTrackwidthMeters));
+  }
+
+  namespace AutoConstants {
+    double kMaxSpeedMetersPerSecond = 0.8;
+    double kMaxAccelerationMetersPerSecondSquared = 0.8;
+
+    // Reasonable baseline values for a RAMSETE follower in units of meters and seconds
+    double kRamseteB = 2;
+    double kRamseteZeta = 0.7;
+  }
+}

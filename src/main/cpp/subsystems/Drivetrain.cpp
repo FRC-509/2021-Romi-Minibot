@@ -24,6 +24,15 @@ Drivetrain::Drivetrain() {
 
 void Drivetrain::Periodic() {
   // This method will be called once per scheduler run.
+  m_odometer.Update(
+    frc::Rotation2d(),
+    units::meter_t(m_leftEncoder.GetDistance()),
+    units::meter_t(m_rightEncoder.GetDistance())
+    );
+}
+
+frc::Pose2d Drivetrain::GetPose(){
+  return m_odometer.GetPose();
 }
 
 void Drivetrain::ArcadeDrive(double xaxisSpeed, double zaxisRotate) {

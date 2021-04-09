@@ -13,6 +13,8 @@
 
 #include "sensors/RomiGyro.h"
 
+#include <frc/kinematics/DifferentialDriveOdometry.h>
+
 class Drivetrain : public frc2::SubsystemBase {
  public:
   static constexpr double kCountsPerRevolution = 1440.0;
@@ -108,6 +110,8 @@ class Drivetrain : public frc2::SubsystemBase {
    */
   void ResetGyro();
 
+  frc::Pose2d GetPose();
+
  private:
   frc::Spark m_leftMotor{0};
   frc::Spark m_rightMotor{1};
@@ -119,4 +123,6 @@ class Drivetrain : public frc2::SubsystemBase {
 
   RomiGyro m_gyro;
   frc::BuiltInAccelerometer m_accelerometer;
+
+  frc::DifferentialDriveOdometry m_odometer {frc::Rotation2d(), frc::Pose2d()};
 };

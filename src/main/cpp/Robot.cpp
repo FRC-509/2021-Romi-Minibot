@@ -11,12 +11,24 @@
 
 #include "subsystems/Drivetrain.h"
 #include "PID.h"
+#include "frc2/command/RamseteCommand.h"
+#include "wpi/SmallString.h"
+#include <frc/Filesystem.h>
+#include "wpi/Path.h"
+#include "frc/trajectory/TrajectoryUtil.h"
 Drivetrain driver;
+frc::Trajectory trajectory;
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
+  wpi::SmallString<64> deployDir;
+  frc::filesystem::GetDeployDirectory(deployDir);
+  wpi::sys::path::append(deployDir, "paths");
+  wpi::sys::path::append(deployDir, "ThePath01.wpilib.json");
+  trajectory = frc::TrajectoryUtil::FromPathweaverJson(deployDir);
 }
 
 /**
@@ -61,6 +73,13 @@ void Robot::AutonomousPeriodic() {
   } else {
     // Default Auto goes here
   }
+
+  driver.ResetEncoders();
+  // frc2::RamseteCommand ramseteCommand(
+  //   trajectory,
+  //   [this](){ return driver.GetPose(); },
+
+  // );
 }
 
 
