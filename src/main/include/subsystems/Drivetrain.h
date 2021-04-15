@@ -112,6 +112,8 @@ class Drivetrain : public frc2::SubsystemBase {
 
   frc::Pose2d GetPose();
 
+  frc::DifferentialDriveWheelSpeeds GetWheelSpeeds();
+
  private:
   frc::Spark m_leftMotor{0};
   frc::Spark m_rightMotor{1};

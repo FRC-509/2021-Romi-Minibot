@@ -35,6 +35,13 @@ frc::Pose2d Drivetrain::GetPose(){
   return m_odometer.GetPose();
 }
 
+frc::DifferentialDriveWheelSpeeds Drivetrain::GetWheelSpeeds(){
+  return {
+    units::meters_per_second_t(m_leftEncoder.GetRate()),
+    units::meters_per_second_t(m_rightEncoder.GetRate())
+  };
+}
+
 void Drivetrain::ArcadeDrive(double xaxisSpeed, double zaxisRotate) {
   m_drive.ArcadeDrive(xaxisSpeed, zaxisRotate);
 }

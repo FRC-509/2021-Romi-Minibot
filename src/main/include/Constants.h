@@ -20,13 +20,13 @@ constexpr double kWheelDiameterInch = 2.75;
 
 namespace AutoConstants {
   namespace DriveConstants {
-    double ksVolts = 0.929;
-    double kvVoltSecondsPerMeter = 6.33;
-    double kaVoltSecondsSquaredPerMeter = 0.0389;
+    constexpr auto ksVolts = 0.929_V;
+    constexpr auto kvVoltSecondsPerMeter = 6.33 * 1_V * 1_s / 1_m;
+    constexpr auto kaVoltSecondsSquaredPerMeter = 0.0389 * 1_V * 1_s * 1_s / 1_m;
 
     double kPDriveVel = 0.085;
 
-    double kTrackwidthMeters = 0.142072613;
+    constexpr auto kTrackwidthMeters = 0.142072613_m;
     frc::DifferentialDriveKinematics kDriveKinematics (units::meter_t(kTrackwidthMeters));
   }
 

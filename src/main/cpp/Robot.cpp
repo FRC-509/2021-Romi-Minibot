@@ -11,6 +11,7 @@
 
 #include "subsystems/Drivetrain.h"
 #include "PID.h"
+#include "Constants.h"
 #include "frc2/command/RamseteCommand.h"
 #include "wpi/SmallString.h"
 #include <frc/Filesystem.h>
@@ -41,6 +42,24 @@ void Robot::RobotInit() {
  */
 void Robot::RobotPeriodic() {}
 
+frc2::Command* GetAutonomousCommand(){
+  frc2::RamseteCommand ramseteCommand(
+    trajectory,
+    [](){ return driver.GetPose();},
+    frc::RamseteController(AutoConstants::AutoConstants::kRamseteB, AutoConstants::AutoConstants::kRamseteZeta),
+    frc::SimpleMotorFeedforward<units::meters>(
+      AutoConstants::DriveConstants::ksVolts,
+      AutoConstants::DriveConstants::kvVoltSecondsPerMeter,
+      AutoConstants::DriveConstants::kaVoltSecondsSquaredPerMeter),
+    AutoConstants::DriveConstants::kDriveKinematics,
+    []{ return driver.GetWheelSpeeds(); },
+    frc2::PIDController(AutoConstants::DriveConstants::kPDriveVel, 0, 0),
+    frc2::PIDController(AutoConstants::DriveConstants::kPDriveVel, 0, 0),
+    [](auto left, auto right){ driver.TankDriveVolts(left, right); },
+    {&driver}
+  );
+}
+
 /**
  * This autonomous (along with the chooser code above) shows how to select
  * between different autonomous modes using the dashboard. The sendable chooser
@@ -53,19 +72,19 @@ void Robot::RobotPeriodic() {}
  * make sure to add them to the chooser code above as well.
  */
 void Robot::AutonomousInit() {
-  m_autoSelected = m_chooser.GetSelected();
-  // m_autoSelected = SmartDashboard::GetString("Auto Selector",
-  //     kAutoNameDefault);
-  std::cout << "Auto selected: " << m_autoSelected << std::endl;
+  // m_autoSelected = m_chooser.GetSelected();
+  // // m_autoSelected = SmartDashboard::GetString("Auto Selector",
+  // //     kAutoNameDefault);
+  // std::cout << "Auto selected: " << m_autoSelected << std::endl;
 
-  if (m_autoSelected == kAutoNameCustom) {
-    // Custom Auto goes here
-  } else {
-    // Default Auto goes here
-  }
+  // if (m_autoSelected == kAutoNameCustom) {
+  //   // Custom Auto goes here
+  // } else {
+  //   // Default Auto goes here
+  // }
+
+  
 }
-
-
 
 void Robot::AutonomousPeriodic() {
   if (m_autoSelected == kAutoNameCustom) {
@@ -74,12 +93,8 @@ void Robot::AutonomousPeriodic() {
     // Default Auto goes here
   }
 
-  driver.ResetEncoders();
-  // frc2::RamseteCommand ramseteCommand(
-  //   trajectory,
-  //   [this](){ return driver.GetPose(); },
-
-  // );
+  //driver.ResetEncoders();
+  
 }
 
 
