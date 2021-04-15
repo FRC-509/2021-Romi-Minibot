@@ -27,7 +27,7 @@ namespace AutoConstants {
     double kPDriveVel = 0.085;
 
     constexpr auto kTrackwidthMeters = 0.142072613_m;
-    frc::DifferentialDriveKinematics kDriveKinematics (units::meter_t(kTrackwidthMeters));
+    frc::DifferentialDriveKinematics kDriveKinematics(kTrackwidthMeters);
   }
 
   namespace AutoConstants {

@@ -6,9 +6,7 @@
 
 #include <wpi/math>
 
-#include "Constants.h"
-
-using namespace DriveConstants;
+//#include "Constants.h"
 
 // The Romi has the left and right motors set to
 // PWM channels 0 and 1 respectively
