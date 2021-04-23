@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "sensors/RomiGyro.h"
+#include <wpi/math>
 
 RomiGyro::RomiGyro() : m_simDevice("Gyro:RomiGyro") {
   if (m_simDevice) {
@@ -76,4 +77,8 @@ void RomiGyro::Reset() {
     m_angleYOffset = m_simAngleY.Get();
     m_angleZOffset = m_simAngleZ.Get();
   }
+}
+
+frc::Rotation2d RomiGyro::GetRotation2d(){
+  return frc::Rotation2d(units::radian_t(GetAngleZ() * wpi::math::pi / 180));
 }

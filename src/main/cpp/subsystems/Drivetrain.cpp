@@ -6,8 +6,6 @@
 
 #include <wpi/math>
 
-//#include "Constants.h"
-
 // The Romi has the left and right motors set to
 // PWM channels 0 and 1 respectively
 // The Romi has onboard encoders that are hardcoded
@@ -23,9 +21,9 @@ Drivetrain::Drivetrain() {
 void Drivetrain::Periodic() {
   // This method will be called once per scheduler run.
   m_odometer.Update(
-    frc::Rotation2d(),
+    m_gyro.GetRotation2d(),
     units::meter_t(m_leftEncoder.GetDistance()),
-    units::meter_t(m_rightEncoder.GetDistance())
+    units::meter_t(-m_rightEncoder.GetDistance())
     );
 }
 
@@ -95,4 +93,10 @@ double Drivetrain::GetGyroAngleZ() {
 
 void Drivetrain::ResetGyro() {
   m_gyro.Reset();
+}
+
+void Drivetrain::TankDriveVolts(units::volt_t left, units::volt_t right){
+  m_leftMotor.SetVoltage(left);
+  m_rightMotor.SetVoltage(right);
+  m_drive.Feed();
 }

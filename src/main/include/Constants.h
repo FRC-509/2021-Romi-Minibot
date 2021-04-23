@@ -31,8 +31,8 @@ namespace AutoConstants {
   }
 
   namespace AutoConstants {
-    double kMaxSpeedMetersPerSecond = 0.8;
-    double kMaxAccelerationMetersPerSecondSquared = 0.8;
+    units::meters_per_second_t kMaxSpeedMetersPerSecond = 0.8_m / 1_s;
+    units::meters_per_second_squared_t kMaxAccelerationMetersPerSecondSquared = 0.8_m / (1_s * 1_s);
 
     // Reasonable baseline values for a RAMSETE follower in units of meters and seconds
     double kRamseteB = 2;

@@ -19,11 +19,11 @@ class RobotContainer {
   RobotContainer();
 
   frc2::Command* GetAutonomousCommand();
-
+  Drivetrain m_drive;
  private:
   // The robot's subsystems and commands are defined here...
 
-  Drivetrain m_drive;
+  
 
   void ConfigureButtonBindings();
 };

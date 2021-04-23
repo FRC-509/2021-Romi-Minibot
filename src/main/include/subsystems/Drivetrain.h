@@ -119,11 +119,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
   frc::DifferentialDriveWheelSpeeds GetWheelSpeeds();
 
-  void TankDriveVolts(units::volt_t left, units::volt_t right){
-    m_leftMotor.SetVoltage(left);
-    m_rightMotor.SetVoltage(right);
-    m_drive.Feed();
-  }
+  void TankDriveVolts(units::volt_t left, units::volt_t right);
 
  private:
   frc::Spark m_leftMotor{0};

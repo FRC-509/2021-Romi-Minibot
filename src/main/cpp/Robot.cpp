@@ -6,6 +6,10 @@
 
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/CommandScheduler.h>
+#include <frc/Joystick.h>
+
+frc::Joystick l_stick (1);
+frc::Joystick r_stick (2);
 
 void Robot::RobotInit() {}
 
@@ -35,8 +39,8 @@ void Robot::DisabledPeriodic() {}
  * RobotContainer} class.
  */
 void Robot::AutonomousInit() {
+  m_container.m_drive.ResetGyro();
   m_autonomousCommand = m_container.GetAutonomousCommand();
-
   if (m_autonomousCommand != nullptr) {
     m_autonomousCommand->Schedule();
   }
@@ -58,7 +62,10 @@ void Robot::TeleopInit() {
 /**
  * This function is called periodically during operator control.
  */
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() {
+  std::cout << "here!";
+  m_container.m_drive.ArcadeDrive(l_stick.GetRawAxis(0), r_stick.GetRawAxis(0));
+}
 
 /**
  * This function is called periodically during test mode.

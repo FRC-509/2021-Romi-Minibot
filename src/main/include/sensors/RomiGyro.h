@@ -5,6 +5,7 @@
 #pragma once
 
 #include <hal/SimDevice.h>
+#include <frc/geometry/Rotation2d.h>
 
 class RomiGyro {
  public:
@@ -44,6 +45,8 @@ class RomiGyro {
    * Resets the gyro
    */
   void Reset();
+
+  frc::Rotation2d GetRotation2d();
 
  private:
   hal::SimDevice m_simDevice;
